@@ -224,7 +224,7 @@ class CMAES(optimizer.OPTIMIZER):
 
         C_profit = np.vectorize(gaussian_function)(self.X_PLOT, self.Y_PLOT)
         ax.contour(self.X_PLOT, self.Y_PLOT, C_profit, levels=[i for i in np.arange(0.01, 0.10, 0.01)],
-                   colors=['yellow'], linewidths=[0.3], linestyles=['dashed'])
+                   colors=['blue'], linewidths=[0.3], linestyles=['dashed'])
 
         # sample pointsの散布図，中心点，および最良解
         ax.scatter(self.x[:, 0], self.x[:, 1], color='black')
@@ -239,4 +239,6 @@ class CMAES(optimizer.OPTIMIZER):
         ax.set_ylim(plot_range)
         ax.set_aspect('equal')
 
-        plt.show()
+        plt.savefig(str(self.generation + 1).zfill(2) + '.png')
+
+        plt.clf()

@@ -62,8 +62,7 @@ def optimize():
 
     # create optimizer
     optimizer = DDCMAES(functions_to_be_optimized.sphere_function,
-                        population_size=args.population_size,
-                        plot_evolution_or_not=True)
+                        population_size=args.population_size)
 
     # optimization iteration
     logger.info('Optimization start.')
