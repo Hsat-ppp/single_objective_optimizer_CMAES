@@ -7,7 +7,7 @@ import copy
 import matplotlib.pyplot as plt
 import numpy as np
 
-from single_objective_optimizer.model.common_settings import *
+from single_objective_optimizer.model.settings import *
 from single_objective_optimizer.model import optimizer
 
 approximated_E_normal = (np.sqrt(n) * (1.0 - (1.0 / (4.0 * n)) + (1.0 / (21.0 * n * n))))
@@ -17,7 +17,7 @@ class DDCMAES(optimizer.OPTIMIZER):
     """
     dd-CMA-ES optimizer class
     """
-    def __init__(self, obj_func, population_size=int(4+np.floor(3*np.log(n))),
+    def __init__(self, obj_func, population_size=None,
                  mu=None, mean=None, step_size=1.00,
                  cov_mat_coef=1.0, dd_mat_coef=1.0, t_eig=None,
                  plot_evolution_or_not=False):
@@ -36,7 +36,10 @@ class DDCMAES(optimizer.OPTIMIZER):
         super().__init__(obj_func, plot_evolution_or_not)
 
         # compute preliminary parameters
-        self.population_size = population_size
+        if population_size is None:
+            self.population_size = int(4+np.floor(3*np.log(n)))
+        else:
+            self.population_size = population_size
         self.weight_pre = np.array([np.log((self.population_size + 1.0) / 2.0) - np.log(i)
                                     for i in range(1, self.population_size+1, 1)])
         if mu is None:

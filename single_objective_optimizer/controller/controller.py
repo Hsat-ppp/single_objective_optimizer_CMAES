@@ -5,8 +5,9 @@ import logging
 import numpy as np
 import tqdm
 
-from single_objective_optimizer.model.common_settings import *
+from single_objective_optimizer.model.settings import *
 from single_objective_optimizer.model.dd_cmaes_optimizer import DDCMAES
+from single_objective_optimizer.model.GA_optimizer import GA_JGG
 from single_objective_optimizer.model import functions_to_be_optimized
 from single_objective_optimizer.utils.utils import set_seed_num
 
@@ -20,7 +21,7 @@ def get_argparser_options():
                                     ''')
     parser.add_argument('-g', '--num_of_generations', default=100, type=int,
                         help='number of generations (iterations)')
-    parser.add_argument('-p', '--population_size', default=int(4+np.floor(3*np.log(n))), type=int,
+    parser.add_argument('-p', '--population_size', type=int,
                         help='population size or number of individuals.')
     parser.add_argument('-s', '--seed_num', type=int,
                         help='seed number for reproduction.')

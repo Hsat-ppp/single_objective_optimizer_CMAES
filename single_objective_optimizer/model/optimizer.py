@@ -3,7 +3,7 @@ General optimizer class.
 """
 import numpy as np
 
-from single_objective_optimizer.model.common_settings import *
+from single_objective_optimizer.model.settings import *
 
 
 class OPTIMIZER(object):
