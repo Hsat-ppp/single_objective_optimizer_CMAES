@@ -6,6 +6,7 @@ import numpy as np
 import tqdm
 
 from single_objective_optimizer.model.settings import *
+from single_objective_optimizer.model.cmaes_optimizer import CMAES
 from single_objective_optimizer.model.dd_cmaes_optimizer import DDCMAES
 from single_objective_optimizer.model.GA_optimizer import GA_JGG
 from single_objective_optimizer.model import functions_to_be_optimized
@@ -44,8 +45,9 @@ def optimize():
     args = get_argparser_options()
     assert args.num_of_generations >= 1, 'Option "num_of_generations" need to be positive. ' \
                                          'Got: {}'.format(args.num_of_generations)
-    assert args.population_size >= 1, 'Option "population_size" need to be positive. ' \
-                                      'Got: {}'.format(args.population_size)
+    if not args.population_size is None:
+        assert args.population_size >= 1, 'Option "population_size" need to be positive. ' \
+                                          'Got: {}'.format(args.population_size)
     # save args
     logger.info('args options')
     logger.info(args.__dict__)
@@ -60,7 +62,8 @@ def optimize():
 
     # create optimizer
     optimizer = DDCMAES(functions_to_be_optimized.sphere_function,
-                        population_size=args.population_size)
+                        population_size=args.population_size,
+                        plot_evolution_or_not=True)
 
     # optimization iteration
     logger.info('Optimization start.')

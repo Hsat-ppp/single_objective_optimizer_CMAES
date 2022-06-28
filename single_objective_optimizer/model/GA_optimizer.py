@@ -9,8 +9,8 @@ import random
 import matplotlib.pyplot as plt
 import numpy as np
 
-from settings import *
-import optimizer
+from single_objective_optimizer.model.settings import *
+from single_objective_optimizer.model import optimizer
 
 
 class GA_JGG(optimizer.OPTIMIZER):
@@ -173,7 +173,7 @@ class GA_JGG(optimizer.OPTIMIZER):
         ax = plt.subplot()
 
         # obj_funcのコンター図
-        ax.pcolormesh(self.X_PLOT, self.Y_PLOT, self.obj_func_profit, cmap='viridis', shading='auto')
+        ax.contour(self.X_PLOT, self.Y_PLOT, self.obj_func_profit, colors=['black'])
 
         # 集団，および最良解
         ax.scatter(self.population[:, 0], self.population[:, 1], color='black')

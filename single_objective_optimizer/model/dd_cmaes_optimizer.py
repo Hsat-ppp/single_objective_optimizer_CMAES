@@ -394,7 +394,8 @@ class DDCMAES(optimizer.OPTIMIZER):
         ax = plt.subplot()
 
         # obj_funcのコンター図
-        ax.pcolormesh(self.X_PLOT, self.Y_PLOT, self.obj_func_profit, cmap='viridis', shading='auto')
+        cont = ax.contour(self.X_PLOT, self.Y_PLOT, self.obj_func_profit, levels=10)
+        cont.clabel(fmt='%1.1f', fontsize=12)
 
         # Cの等確率線
         def gaussian_function(cx, cy):
@@ -404,7 +405,7 @@ class DDCMAES(optimizer.OPTIMIZER):
 
         C_profit = np.vectorize(gaussian_function)(self.X_PLOT, self.Y_PLOT)
         ax.contour(self.X_PLOT, self.Y_PLOT, C_profit, levels=[i for i in np.arange(0.01, 0.10, 0.01)],
-                   colors=['yellow'], linewidths=[0.3], linestyles=['dashed'])
+                   colors=['blue'], linewidths=[0.3], linestyles=['dashed'])
 
         # sample pointsの散布図，中心点，および最良解
         ax.scatter(self.x[:, 0], self.x[:, 1], color='black')
