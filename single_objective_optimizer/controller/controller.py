@@ -61,8 +61,9 @@ def optimize():
     create_output_file()
 
     # create optimizer
-    optimizer = DDCMAES(functions_to_be_optimized.sphere_function,
-                        population_size=args.population_size)
+    optimizer = GA_JGG(functions_to_be_optimized.sphere_function,
+                        population_size=args.population_size,
+                       plot_evolution_or_not=True)
 
     # optimization iteration
     logger.info('Optimization start.')

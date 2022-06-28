@@ -173,7 +173,8 @@ class GA_JGG(optimizer.OPTIMIZER):
         ax = plt.subplot()
 
         # obj_funcのコンター図
-        ax.contour(self.X_PLOT, self.Y_PLOT, self.obj_func_profit, colors=['black'])
+        cont = ax.contour(self.X_PLOT, self.Y_PLOT, self.obj_func_profit, levels=10)
+        cont.clabel(fmt='%1.1f', fontsize=12)
 
         # 集団，および最良解
         ax.scatter(self.population[:, 0], self.population[:, 1], color='black')
