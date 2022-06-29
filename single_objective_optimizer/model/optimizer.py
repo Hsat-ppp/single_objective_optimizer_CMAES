@@ -1,6 +1,8 @@
 """
 General optimizer class.
 """
+import os
+
 import numpy as np
 
 from single_objective_optimizer.model.settings import *
@@ -34,3 +36,6 @@ class OPTIMIZER(object):
             self.X_PLOT, self.Y_PLOT = np.meshgrid(self.x_plot, self.y_plot)
             self.profit_points = np.array([self.X_PLOT.ravel(), self.Y_PLOT.ravel()]).T
             self.obj_func_profit = self.obj_func(self.profit_points).reshape((len(self.x_plot), len(self.y_plot)))
+
+        # create output folder
+        os.mkdir(result_dir)
