@@ -76,9 +76,9 @@ class GA_JGG(optimizer.OPTIMIZER):
         # generate initial population
         self.population = (self.pop_range_lower + (self.pop_range_upper - self.pop_range_lower)
                            * np.random.rand(self.population_size, n))
-        self.generation = 99999  # special value representing initial generation
+        self.generation = -1
         with open('Generation.csv', 'w') as f:
-            print(str(self.generation), file=f)
+            print(str(self.generation + 1), file=f)
         # evaluate
         self.evaluation_vec = self.obj_func(self.population)
         self.num_of_evaluation += self.population.shape[0]
